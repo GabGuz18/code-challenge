@@ -5,7 +5,7 @@ import { WeatherCard } from '@/components/WeatherCard'
 
 const apiKey = "0eebd1fcf852d29ca0340c5c451d4c9a"
 
-const page = () => {
+const Page = () => {
 
   const [City, setCity] = useState('');
   const [Weather, setWeather] = useState([]);
@@ -59,4 +59,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
