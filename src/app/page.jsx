@@ -7,8 +7,8 @@ const apiKey = "0eebd1fcf852d29ca0340c5c451d4c9a"
 
 const page = () => {
 
-  const [city, setCity] = useState('');
-  const [weather, setWeather] = useState([]);
+  const [City, setCity] = useState('');
+  const [Weather, setWeather] = useState([]);
 
   const fetchWeather = async () => {
 
@@ -16,7 +16,7 @@ const page = () => {
     setWeather([])
 
     try {
-      const res = await fetch(`https://search.reservamos.mx/api/v2/places?q=${city}`);
+      const res = await fetch(`https://search.reservamos.mx/api/v2/places?q=${City}`);
       const data = await res.json();
 
       if (data.length > 0) {
@@ -40,13 +40,13 @@ const page = () => {
     <div className='container'>
       <h1>Weather App</h1>
       <div className='form'>
-        <input type="text" placeholder='City' value={city} onChange={(e) => setCity(e.target.value)}/>
+        <input type="text" placeholder='City' value={City} onChange={(e) => setCity(e.target.value)}/>
         <button onClick={fetchWeather}>Search</button>
       </div>
-      <h2>{city}</h2>
+      <h2>{City}</h2>
       <div className='cards'>
         {
-          weather.length > 0 && weather.map((temp) => {
+          Weather.length > 0 && Weather.map((temp) => {
             return (
               <div key={temp.dt}>
                 <WeatherCard date={temp.dt_txt} temp={temp.main.temp} />
