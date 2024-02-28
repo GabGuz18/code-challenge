@@ -8,6 +8,7 @@ const apiKey = "0eebd1fcf852d29ca0340c5c451d4c9a"
 const Page = () => {
 
   const [City, setCity] = useState('');
+  const [Place, setPlace] = useState('');
   const [Weather, setWeather] = useState([]);
 
   const fetchWeather = async () => {
@@ -20,7 +21,8 @@ const Page = () => {
       const data = await res.json();
 
       if (data.length > 0) {
-        const { lat, long } = data[0];
+        const { lat, long, city_name } = data[0];
+        setPlace(city_name)
         const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`);
         const weatherData = await weatherResponse.json();
         const array = weatherData.list
@@ -43,13 +45,13 @@ const Page = () => {
         <input type="text" placeholder='City' value={City} onChange={(e) => setCity(e.target.value)}/>
         <button onClick={fetchWeather}>Search</button>
       </div>
-      <h2>{City}</h2>
+      <h2>{Place}</h2>
       <div className='cards'>
         {
           Weather.length > 0 && Weather.map((temp) => {
             return (
               <div key={temp.dt}>
-                <WeatherCard date={temp.dt_txt} temp={temp.main.temp} />
+                <WeatherCard date={temp.dt_txt} tempMin={temp.main.temp_min} tempMax={temp.main.temp_max}/>
               </div>
             )
           })
